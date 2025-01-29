@@ -1,0 +1,85 @@
+import pandas as pd
+
+from pandas.core.interchange.dataframe_protocol import DataFrame
+
+df_excel = pd.read_excel('Оценки (4) (1).xlsx')# df_elements = df_excel.sample(n=10)
+
+# print(df_elements)
+while True:
+      print('Меню функций:\n'
+      '1. Вывести всю таблицу\n' '2. Вывести строку по индексу\n'
+      '3. Вывести столбец по индексу\n' '4. Вывести ячейку\n'
+      '5. Вывести информацию о таблице\n' '6. Изменение ячейки\n'
+      '7. Найти инфу\n'  '8.Выход\n')
+      try:
+                  action = input('Впиши здесь: ')
+                  if action == '1' or action == 'Вывести всю таблицу':
+                        print(df_excel)
+
+                  elif action == '2' or action == 'Вывести строку по индексу':
+                        line_index = int(input('Введите индекс строки: '))
+                        df_line = df_excel.iloc[line_index-1]
+                        print(df_line)
+
+                  elif action == '3' or action == 'Вывести столбец по индексу':
+                        column_index = int(input('Введите индекс столбца: '))
+                        df_column = df_excel.iloc[:, column_index-1]
+                        print(df_column)
+
+                  elif action == '4' or action == 'Вывести ячейку':
+                        line_index = int(input('Введите строку ячейки: '))
+                        column_index = int(input('Введите столбец строки: '))
+                        df_cell = df_excel.iloc[line_index-1, column_index-1]
+                        print(df_cell)
+
+                  elif action == '5' or action == 'Вывести информацию о таблице':
+                        print(df_excel.info())
+
+                  elif action == '6' or action == 'Изменение ячейки':
+                        line_index = int(input('Введите строку ячейки: '))
+                        column_index = int(input('Введите столбец строки: '))
+                        df_cell = df_excel.iloc[line_index - 1, column_index - 1]
+                        print(df_cell)
+                        changes = input('Введите данные для изменения: ')
+                        if changes.isdigit() == True:
+                              df_excel.iloc[line_index, column_index] = int(changes)
+                        elif changes.isdigit() == False:
+                              df_excel.iloc[line_index, column_index] = str(changes)
+                              print(changes)
+
+                  # elif action == '7' or action == 'Найти инфу':
+                  #     print('Выбери, что потребуется:\n'
+                  #           '1. Строка\n'
+                  #           '2. Столбец')
+                  #     list_nums = []
+                  #     action2 = int(input('Здесь: '))
+                  # 
+                  #     if action2 == 1:
+                  #         line2 = int(input('Введи индекс: '))
+                  #         act = line2
+                  # 
+                  #     elif action2 == 2:
+                  #         column2 = float(input('Введи индекс: '))
+                  #         act = column2
+                  # 
+                  #     # for item in act:
+                  #     #     item_type = item.isdigit
+                  #     #     if item_type == False:
+                  #     #         continue
+                  #     #     elif item_type == True:
+                  #     #         list_nums.append(item)
+                  #     # list_nums = sorted(list_nums)
+                  #     # minimum = list_nums[0]
+                  #     # maximum = list_nums[-1]
+                  #     minimum = df[act].min()
+                  #     maximum = df[act].max()
+                  # 
+                  #     mediana = df[act].median()
+                  #     print(f"min = {minimum}\n"
+                  #           f"max = {maximum}\n"
+                  #           f"median = {mediana}")
+
+                  elif action == '8' or action == 'Выход':
+                        break
+      except:
+                  print('В таблице только 3 столбца.')
